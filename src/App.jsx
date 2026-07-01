@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Preloader from './components/Preloader';
+import React, { useEffect } from 'react';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import EducationSection from './components/EducationSection';
@@ -8,18 +7,35 @@ import ProjectsSection from './components/Projects/ProjectsSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFaded, setIsFaded] = useState(false);
-  const heroImagesRef = useRef([]);
-  const eduImagesRef = useRef([]);
+const totalFrames = 240;
+const totalEduFrames = 164;
 
-  function handleComplete() {
-    setIsFaded(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
-  }
+function getFramePath(index) {
+  const pad = String(index).padStart(3, '0');
+  return `/assets/hero-frames/ezgif-frame-${pad}.jpg`;
+}
+
+function getEduFramePath(index) {
+  const pad = String(index).padStart(3, '0');
+  return `/assets/education-frames/ezgif-frame-${pad}.jpg`;
+}
+
+// Synchronously initialize the image arrays so they are populated on the first render
+const heroImages = [];
+for (let i = 1; i <= totalFrames; i++) {
+  const img = new Image();
+  img.src = getFramePath(i);
+  heroImages.push(img);
+}
+
+const eduImages = [];
+for (let i = 1; i <= totalEduFrames; i++) {
+  const img = new Image();
+  img.src = getEduFramePath(i);
+  eduImages.push(img);
+}
+
+function App() {
 
   // Butter-smooth wheel scroll lerping to make scroll-bound animations feel extremely smooth
   useEffect(() => {
@@ -36,11 +52,11 @@ function App() {
       e.preventDefault();
       // Temporarily disable CSS smooth scrolling to prevent conflict with JS lerp
       document.documentElement.style.scrollBehavior = 'auto';
-      
+
       // Interpolate target scroll position based on delta
       targetScroll += e.deltaY;
       targetScroll = Math.max(0, Math.min(targetScroll, document.documentElement.scrollHeight - window.innerHeight));
-      
+
       if (rafId === null) {
         rafId = requestAnimationFrame(update);
       }
@@ -51,10 +67,10 @@ function App() {
       if (Math.abs(diff) < 0.1) {
         currentScroll = targetScroll;
         window.scrollTo(0, currentScroll);
-        
+
         // Restore CSS smooth scrolling for navbar click navigations
         document.documentElement.style.scrollBehavior = 'smooth';
-        
+
         rafId = null;
         return;
       }
@@ -83,27 +99,15 @@ function App() {
 
   return (
     <>
-      {isLoading && (
-        <Preloader
-          onComplete={handleComplete}
-          heroImagesRef={heroImagesRef}
-          eduImagesRef={eduImagesRef}
-          isFaded={isFaded}
-        />
-      )}
-      {!isLoading && (
-        <>
-          <Header />
-          <HeroSection images={heroImagesRef.current} />
-          <main className="main-content">
-            <EducationSection images={eduImagesRef.current} />
-            <SkillsSection />
-            <ProjectsSection />
-            <ContactSection />
-          </main>
-          <Footer />
-        </>
-      )}
+      <Header />
+      <HeroSection images={heroImages} />
+      <main className="main-content">
+        <EducationSection images={eduImages} />
+        <SkillsSection />
+        <ProjectsSection />
+        <ContactSection />
+      </main>
+      <Footer />
     </>
   );
 }

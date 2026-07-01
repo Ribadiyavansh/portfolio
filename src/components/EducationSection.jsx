@@ -31,7 +31,7 @@ export default function EducationSection({ images }) {
       const width = window.innerWidth;
       const height = window.innerHeight;
       context.clearRect(0, 0, width, height);
-      
+
       const imgRatio = img.width / img.height;
       const canvasRatio = width / height;
       let sWidth, sHeight, sx, sy;
@@ -114,7 +114,7 @@ export default function EducationSection({ images }) {
         animState.isLoopActive = false;
         return;
       }
-      
+
       animState.currentFrame += diff * animState.ease;
       renderFrame(Math.round(animState.currentFrame));
       requestAnimationFrame(eduAnimationLoop);
@@ -130,9 +130,9 @@ export default function EducationSection({ images }) {
       const eduRange = eduHeight - window.innerHeight;
       let eduProgress = (scrollY - eduTop) / eduRange;
       eduProgress = Math.max(0, Math.min(1, eduProgress));
-      
+
       animStateRef.current.targetFrame = eduProgress * (totalEduFrames - 1);
-      
+
       if (!animStateRef.current.isLoopActive && scrollY >= eduTop - window.innerHeight && scrollY <= eduTop + eduHeight) {
         animStateRef.current.isLoopActive = true;
         requestAnimationFrame(eduAnimationLoop);
@@ -142,7 +142,7 @@ export default function EducationSection({ images }) {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('scroll', handleScroll);
-    
+
     renderFrame(0);
     handleScroll();
 
@@ -156,7 +156,7 @@ export default function EducationSection({ images }) {
     <div id="education" ref={containerRef} className="education-scroll-container">
       <div className="education-canvas-sticky">
         <canvas ref={canvasRef} id="education-canvas"></canvas>
-        
+
         <div className="glow-orb orb-education-1"></div>
         <div className="glow-orb orb-education-2"></div>
 

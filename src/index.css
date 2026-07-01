@@ -418,6 +418,7 @@ body.light-theme .text-glow {
     transform: translate(-50%, -50%) scale(0.85);
     opacity: 0.5;
   }
+
   100% {
     transform: translate(-50%, -50%) scale(1.1);
     opacity: 1;
@@ -2041,7 +2042,8 @@ body.light-theme .projects-scroll-container .timeline-dot-wrapper:hover .timelin
 
 /* Custom Contact Section Override - Forest Green Background & Solid Black Form Card */
 .contact-section {
-  background-color: #2d3e2c !important; /* Deep forest olive green */
+  background-color: #2d3e2c !important;
+  /* Deep forest olive green */
 }
 
 body.light-theme .contact-section {
@@ -2118,7 +2120,7 @@ body.light-theme .contact-section .form-group textarea:not(:placeholder-shown)~l
 .contact-section .btn-primary {
   background: linear-gradient(135deg, #00d6c5 0%, #0066ff 100%) !important;
   color: #ffffff !important;
-  box-shadow: 
+  box-shadow:
     0 6px 0 #002e2c,
     0 12px 24px rgba(0, 0, 0, 0.4) !important;
 }
@@ -2126,7 +2128,7 @@ body.light-theme .contact-section .form-group textarea:not(:placeholder-shown)~l
 body.light-theme .contact-section .btn-primary {
   background: linear-gradient(135deg, #00d6c5 0%, #0066ff 100%) !important;
   color: #ffffff !important;
-  box-shadow: 
+  box-shadow:
     0 6px 0 #002e2c,
     0 12px 24px rgba(0, 0, 0, 0.4) !important;
 }

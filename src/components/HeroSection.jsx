@@ -31,7 +31,7 @@ export default function HeroSection({ images }) {
       const width = window.innerWidth;
       const height = window.innerHeight;
       context.clearRect(0, 0, width, height);
-      
+
       const imgRatio = img.width / img.height;
       const canvasRatio = width / height;
       let sWidth, sHeight, sx, sy;
@@ -97,9 +97,9 @@ export default function HeroSection({ images }) {
         }
 
         el.style.opacity = opacity;
-        
+
         el.style.transform = `translateY(calc(-50% + ${yOffset}px))`;
-        
+
         el.style.pointerEvents = opacity > 0 ? 'auto' : 'none';
       });
     }
@@ -116,7 +116,7 @@ export default function HeroSection({ images }) {
         animState.isLoopActive = false;
         return;
       }
-      
+
       animState.currentFrame += diff * animState.ease;
       renderFrame(Math.round(animState.currentFrame));
       requestAnimationFrame(heroAnimationLoop);
@@ -132,9 +132,9 @@ export default function HeroSection({ images }) {
       const heroRange = heroHeight - window.innerHeight;
       let heroProgress = (scrollY - heroTop) / heroRange;
       heroProgress = Math.max(0, Math.min(1, heroProgress));
-      
+
       animStateRef.current.targetFrame = heroProgress * (totalFrames - 1);
-      
+
       if (!animStateRef.current.isLoopActive && scrollY < heroTop + heroHeight) {
         animStateRef.current.isLoopActive = true;
         requestAnimationFrame(heroAnimationLoop);
@@ -144,7 +144,7 @@ export default function HeroSection({ images }) {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('scroll', handleScroll);
-    
+
     renderFrame(0);
     handleScroll();
 
@@ -158,7 +158,7 @@ export default function HeroSection({ images }) {
     <div id="hero" ref={containerRef} className="hero-scroll-container">
       <div className="hero-canvas-sticky">
         <canvas ref={canvasRef} id="animation-canvas"></canvas>
-        
+
         <div className="glow-orb orb-1"></div>
         <div className="glow-orb orb-2"></div>
 
